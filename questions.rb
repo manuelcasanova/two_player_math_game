@@ -22,14 +22,12 @@ class Questions
 
 
     if @player_answer == @answer.to_s
-      #puts "Correct answer"
       puts "#{@current_player}, well done, that's the correct answer"
       @correct = true
     
 
     else
       puts "#{@current_player}, Incorrect answer"
-      # puts "#{current_player}, nope!, that's a wrong answer"
       @correct = false
 
     end
