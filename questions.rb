@@ -4,12 +4,12 @@ class Questions
 
   def initialize(current_player)
     @num1 = rand(1..20)
-    @nume2 = rand(1..20)
-    @answer = @num1 + @nume2
+    @num2 = rand(1..20)
+    @answer = @num1 + @num2
 
     @current_player = current_player
 
-    puts "#{current_player}: What's #{@num1} plus #{@nume2} ?"
+    puts "#{current_player}: What's #{@num1} plus #{@num2} ?"
     ask
 
 
