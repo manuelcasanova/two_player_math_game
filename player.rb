@@ -1,10 +1,10 @@
 class Player
 
-attr_accessor :lives
+  attr_accessor :lives, :name
 
-  def initialize 
+  def initialize(name)
     @lives = 3
-    # @name = name
+    @name = name
   end
 
   def incorrect

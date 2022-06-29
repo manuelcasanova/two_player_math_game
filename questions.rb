@@ -1,27 +1,34 @@
 class Questions
 
-  attr_accessor :correct_answer
+  attr_accessor :correct
 
-    def initialize(current_player)
-      @num1 = rand(20)
-      @num2 = rand(20)
-      @result = @num1 + @num2
-      puts "What is #{@num1} plus #{@num2}?"
-      answer
-    end
+  def initialize(current_player)
+    @num1 = rand(1..20)
+    @nume2 = rand(1..20)
+    @answer = @num1 + @nume2
 
-  def answer
-    @player_input = $stdin.gets.chomp.to_i
+    puts "#{current_player}: What's #{@num1} plus #{@nume2} ?"
+    ask
 
-    if @player_input == @result
+
+  end
+
+  def ask
+
+    @player_answer = gets.chomp
+
+    if @player_answer == @answer.to_s
       puts "Correct answer"
-      @correct_answer = true
-    end
-    
-    if @player_input != @result
-      puts "Wrong answer"
-      @correct_answer = false
+      # puts "#{current_player}, well done, that's the correct answer"
+      @correct = true
+
+    else
+      puts "Incorrect answer"
+      # puts "#{current_player}, nope!, that's a wrong answer"
+      @correct = false
+
     end
 
   end
+
 end

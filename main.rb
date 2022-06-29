@@ -1,90 +1,78 @@
-require "./player"
-require "./questions"
+require './player.rb'
+require './questions.rb'
 
 
 class Game
 
-  attr_accessor :question_loop
-
   def initialize
+    @current_player = 'Amy'
 
-  @player1 = Player.new
-  @player2 = Player.new
+    @player1 = Player.new('Amy')
+    @player2 = Player.new('Manuel')
 
-  @current_player = "Player1"
+    @player1_lives = "#{@player1.lives}/3"
+    @player2_lives = "#{@player2.lives}/3"
 
+    @end = false
 
-  @player1lives = "#{@player1.lives} lives out of 3"
-  @player2lives = "#{@player2.lives} lives out of 3"
-
-  @end = false
-
-  until @end
-    question_loop
-  end
-
-end
-
-def question_loop 
-puts "------ NEW TURN ------"
-
-question = Questions.new(@current_player)
-
-#if !question correct
-if !question.correct_answer
-  incorrect
-end 
-
-def incorrect
-
-  if @current_player == 'Player 1'
-    @player1.incorrect
-    @player1lives = "#{@player1.lives}/3"
-
-    if @player1.lives === 0
-      @end = true
-      puts '----- GAME OVER -----'
-
-    end
-
-  else
-    @player2.incorrect
-    @player_2_lives = "#{@player2.lives}/3"
-
-    if @player2.lives === 0
-      @end = true
-      puts '----- GAME OVER -----'
-
+    until @end
+      question_loop
     end
 
   end
 
-end
+  def question_loop
+
+    puts '--- NEW TURN ---'
+    ask_question = Questions.new(@current_player)
+
+   #If incorrect, 1 life less
+    if !ask_question.correct
+    incorrect
+    end
 
 
+   #Change player
+    if @current_player == 'Amy'
+      @current_player = 'Manuel'
+
+    else @current_player == 'Manuel'
+     @current_player = 'Amy'
+
+    end
+
+    puts "P1: #{@player1.name} #{@player1_lives} vs P2: #{@player2.name} #{@player2_lives}"
 
 
-#Change the player
-
-  if @current_player == "Player1"
-    @current_player = "Player2"
-  
-  else @current_player == "Player2"
-    @current_player = "Player1"
 
   end
 
- puts  "P1: #{@player1.lives}/3 vs P2: #{@player2.lives}/3"
+  def incorrect
 
+    #Check it the player still has lifes
+    if @current_player == 'Amy'
+      @player1.incorrect
+      @player1_lives = "#{@player1.lives}/3"
 
+      if @player1.lives === 0
+        @end = true
+        puts '--- GAME OVER, PAL ---'
 
+      end
+
+    else
+      @player2.incorrect
+      @player2_lives = "#{@player2.lives}/3"
+
+      if @player2.lives === 0
+        @end = true
+        puts '--- GAME OVER, PAL ---'
+
+      end
+    end
   end
-
-
-
 end
 
-
-start_game = Game.new
+start = Game.new
 
 
